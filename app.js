@@ -1,12 +1,12 @@
+const env = require("dotenv");
+env.config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const { PORT, MONGODB_URI } = process.env;
 
 const feedRoutes = require("./routes/feed");
 const authRoutes = require("./routes/auth");
-
-const MONGODB_URI =
-  "mongodb+srv://root:root@cluster0.inbf1sx.mongodb.net/newsfeedmongoose";
 
 const app = express();
 
@@ -38,17 +38,8 @@ mongoose.set("strictQuery", true);
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    app.listen(3000);
+    app.listen(PORT);
   })
   .catch((err) => {
     console.log(err);
   });
-
-// PUT /feed/post/:postId
-
-// GET /feed/posts
-// POST /feed/posts
-// POST /auth/signup
-// POST /auth/login
-// GET /feed/post/:postId
-// DELETE /feed/post/:postId
